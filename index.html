@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lowiq黑卡小卖部 - 夏季特惠</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1f25 0%, #0c0e12 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 顶部导航 */
+        .navbar {
+            background-color: rgba(10, 15, 20, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 8px rgba(82, 255, 168, 0.6));
+        }
+        
+        .logo h1 {
+            font-size: 26px;
+            background: linear-gradient(90deg, #52ffa8, #00c9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(82, 255, 168, 0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #52ffa8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(82, 255, 168, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* 头部横幅 */
+        .header {
+            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 30px;
+            background: rgba(20, 25, 35, 0.85);
+            border-radius: 15px;
+            margin-left: 50px;
+            border: 1px solid rgba(82, 255, 168, 0.3);
+            box-shadow: 0 0 30px rgba(82, 255, 168, 0.2);
+        }
+        
+        .header-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa502);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .header-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+        
+        .discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff7676, #ff0000);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* 产品区域 */
+        .products {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: #52ffa8;
+            text-shadow: 0 0 15px rgba(82, 255, 168, 0.3);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #52ffa8, #00c9ff);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: rgba(30, 35, 45, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(82, 255, 168, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(82, 255, 168, 0.3);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-content {
+            padding: 25px;
+        }
+        
+        .product-title {
+            font-size: 1.8rem;
+            color: #52ffa8;
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            margin-bottom: 20px;
+            color: #b0b0b0;
+            min-height: 100px;
+        }
+        
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 1.2rem;
+        }
+        
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #52ffa8, #00c9ff);
+            color: #1a1f25;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(82, 255, 168, 0.4);
+        }
+        
+        /* 倒计时 */
+        .countdown {
+            background: rgba(20, 25, 35, 0.9);
+            padding: 40px 0;
+            text-align: center;
+            margin: 50px 0;
+            border-top: 2px solid rgba(82, 255, 168, 0.3);
+            border-bottom: 2px solid rgba(82, 255, 168, 0.3);
+        }
+        
+        .countdown-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ff6b6b;
+        }
+        
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .timer-item {
+            background: rgba(30, 35, 45, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 100px;
+            border: 1px solid rgba(82, 255, 168, 0.2);
+        }
+        
+        .timer-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #52ffa8;
+        }
+        
+        .timer-label {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+        
+        /* 用户评价 */
+        .testimonials {
+            padding: 80px 0;
+            background: rgba(15, 20, 30, 0.7);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: rgba(30, 35, 45, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(82, 255, 168, 0.2);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #555;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-info h4 {
+            color: #52ffa8;
+            font-size: 1.3rem;
+        }
+        
+        .user-info p {
+            color: #888;
+        }
+        
+        .stars {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            color: #d0d0d0;
+        }
+        
+        /* 安全提示 */
+        .security {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .security-badge {
+            display: inline-block;
+            background: rgba(82, 255, 168, 0.1);
+            padding: 15px 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid rgba(82, 255, 168, 0.3);
+        }
+        
+        .security-badge i {
+            color: #52ffa8;
+            margin-right: 10px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: rgba(10, 15, 20, 0.95);
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 1px solid rgba(82, 255, 168, 0.2);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: #52ffa8;
+            text-decoration: none;
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .header-content {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .header-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <i class="fas fa-cube" style="font-size: 36px; color: #52ffa8;"></i>
+                <h1>Lowiq黑卡小卖部</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> 首页</a>
+                <a href="#"><i class="fas fa-shopping-cart"></i> 产品</a>
+                <a href="#"><i class="fas fa-tag"></i> 优惠</a>
+                <a href="#"><i class="fas fa-headset"></i> 客服</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 头部横幅 -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h2>NFA AND MFA</h2>
+                <p>We are currently on promotion.</p>
+                <div class="discount-badge">
+                    <i class="fas fa-bolt"></i> 优质售后 价格便宜
+                </div>
+                <p>We do not sell pirated products to customers.</p>
+                <a id="buyButton" class="buy-button" style="margin-top: 20px;">
+                    <i class="fas fa-shopping-cart"></i> Buy now
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 产品区域 -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Best-selling</h2>
+            <div class="product-grid">
+                <!-- 产品 1 -->
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1567602901358-5ba00815eb15?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">NFA 1+</h3>
+                        <p class="product-description">Hypixel Unbanned售后范围：买前banned，无XGP，购买后15分钟内密码错误。
+请购买前录制，否则2fa不售后。
+买多少都是15分钟售后
+
+不可以使用加速IP或加速器(QiuProxy以及绕ipban加速IP除外)</p>
+                        <div class="product-price">
+                            <span class="original-price">原价: ￥89</span>
+                            <span class="price">￥0.8</span>
+                        </div>
+                        <a id="buyButton1" class="buy-button">
+                            <i class="fas fa-bolt"></i> Buy
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 产品 2 -->
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">NFA 21+</h3>
+                        <p class="product-description">Hypixel Unbanned售后范围：买前banned，无XGP，购买后15分钟内密码错误。
+请购买前录制或上不去的截图，否则不售后。
+买多少都是15分钟售后
+
+可以任何使用加速器</p>
+                        <div class="product-price">
+                            <span class="original-price">原价: ￥315</span>
+                            <span class="price">￥6</span>
+                        </div>
+                        <a id="buyButton2" class="buy-button">
+                            <i class="fas fa-bolt"></i> Buy
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 产品 3 -->
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2084&q=80');"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">MFA 21+ MVP++</h3>
+                        <p class="product-description">等级在21级以上 MVP+ RANK
+100% UNBAN in Hypixel(保证unban  ban卡退换   禁赛不支持退换)
+如需迁移协助或咨询请联系客服</p>
+                        <div class="product-price">
+                            <span class="original-price">原价: ￥825</span>
+                            <span class="price">￥110</span>
+                        </div>
+                        <a id="buyButton3" class="buy-button">
+                            <i class="fas fa-bolt"></i> Buy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 倒计时 -->
+    <section class="countdown">
+        <div class="container">
+            <h2 class="countdown-title">限时优惠即将结束！</h2>
+            <div class="timer">
+                <div class="timer-item">
+                    <div class="timer-value" id="hours">12</div>
+                    <div class="timer-label">小时</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-value" id="minutes">45</div>
+                    <div class="timer-label">分钟</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-value" id="seconds">30</div>
+                    <div class="timer-label">秒</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 用户评价 -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">用户真实评价</h2>
+            <div class="testimonial-grid">
+                <!-- 评价 1 -->
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <div class="avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="用户头像">
+                        </div>
+                        <div class="user-info">
+                            <h4>孙政</h4>
+                            <p>2025-06-15</p>
+                        </div>
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"太划算了！0.8元就买到了正版账号，卖家发货超快，已经成功激活游戏，官方验证通过！"</p>
+                </div>
+                
+                <!-- 评价 2 -->
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <div class="avatar">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="用户头像">
+                        </div>
+                        <div class="user-info">
+                            <h4>王文乐</h4>
+                            <p>2025-07-02</p>
+                        </div>
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"给弟弟买的，双版本账号完全正常使用，比官网便宜太多了！客服响应很快，解答很耐心。"</p>
+                </div>
+                
+                <!-- 评价 3 -->
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <div class="avatar">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="用户头像">
+                        </div>
+                        <div class="user-info">
+                            <h4>MTPlus</h4>
+                            <p>2023-07-20</p>
+                        </div>
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"全家尊享包太值了！五个账号全家一起玩，服务器也很稳定。已经推荐给朋友了！"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 安全提示 -->
+    <section class="security">
+        <div class="container">
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i> 100%安全支付 | 官方正版验证 | 24小时客服支持
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">关于我们</a>
+                <a href="#">服务条款</a>
+                <a href="#">隐私政策</a>
+                <a href="#">联系方式</a>
+            </div>
+            
+            <div class="disclaimer">
+                重要声明：本网站仅为教育目的演示钓鱼网站的工作原理。Minecraft是Mojang Studios和Microsoft的注册商标。请通过官方渠道购买正版游戏以支持开发者。点击购买按钮将跳转到官方minecraft.net网站。
+            </div>
+            
+            <p>&copy; 2025 Lowiq小卖部 | 本网站不收集任何用户数据</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 倒计时逻辑
+        function updateCountdown() {
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+            
+            let hours = parseInt(hoursElement.textContent);
+            let minutes = parseInt(minutesElement.textContent);
+            let seconds = parseInt(secondsElement.textContent);
+            
+            seconds--;
+            
+            if (seconds < 0) {
+                seconds = 59;
+                minutes--;
+                
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                    
+                    if (hours < 0) {
+                        hours = 12;
+                        minutes = 0;
+                        seconds = 0;
+                    }
+                }
+            }
+            
+            hoursElement.textContent = hours.toString().padStart(2, '0');
+            minutesElement.textContent = minutes.toString().padStart(2, '0');
+            secondsElement.textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        
+        function redirectToOfficialSite() {
+            // 直接跳转到Minecraft官网
+            window.location.href = 'https://www.minecraft.net/zh-hans';
+        }
+        
+        // 为所有购买按钮添加事件
+        document.getElementById('buyButton').addEventListener('click', redirectToOfficialSite);
+        document.getElementById('buyButton1').addEventListener('click', redirectToOfficialSite);
+        document.getElementById('buyButton2').addEventListener('click', redirectToOfficialSite);
+        document.getElementById('buyButton3').addEventListener('click', redirectToOfficialSite);
+    </script>
+</body>
+</html>
